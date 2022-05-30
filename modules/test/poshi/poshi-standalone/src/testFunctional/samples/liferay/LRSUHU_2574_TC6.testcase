@@ -1,0 +1,37 @@
+definition {
+
+    @description = "LRSUHU_2574_TC6 teszt eset futtatása"
+	test LRSUHU2574TC6
+
+	setUp {
+		Default.Open(locator1 = "https://www.ticketfinder.liferay.com");
+	}
+
+    @priority = "5"
+	test Smoke {
+
+        // Open ticketfinder
+		Default.Open(locator1 = "https://www.ticketfinder.liferay.com");
+        Default.Pause(locator1 = "30000");
+
+        // Go to the component selector
+        Default.Click(locator1 = "TF#FILTER_DROPDOWN");
+        Default.Pause(locator1 = "30000");
+
+        // Assert that the following labels are visible:
+        CDM,DADL,UI,PUMAS,WCM
+        Default.AssertVisible(locator1 = "TF#WCM_CHECKBOX");
+        Default.AssertVisible(locator1 = "TF#CDM_CHECKBOX");
+        Default.AssertVisible(locator1 = "TF#PUMAS_CHECKBOX");
+        Default.AssertVisible(locator1 = "TF#UI_CHECKBOX");
+        Default.AssertVisible(locator1 = "TF#DADL_CHECKBOX");
+        Default.Pause(locator1 = "30000");
+        
+        // Select only WCM component
+        Default.Click(locator1 = "TF#WCM_CHECKBOX");
+        Default.Pause(locator1 = "30000");
+
+        // Assert that the Search button is clickable
+        Default.AssertClick(locator1 = "TF#SEARCH_BUTTON");
+	}
+}
